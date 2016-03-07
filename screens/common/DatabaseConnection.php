@@ -24,7 +24,7 @@ class DatabaseConnection
      * */
     function createConnection()
     {
-        $this->connection = new mysqli("localhost", "root", '123Welcome', "global");
+        $this->connection = new mysqli("localhost", "root", '', "global");
         if (!$this->connection->connect_error) {
             return $this->connection;
         } else
@@ -76,6 +76,27 @@ class DatabaseConnection
         $connection = NULL;
         $db = NULL;
     }
+
+    function setLoginAttempts($username) {
+        mysqli_query($this->connection,"UPDATE user SET login_attempts = login_attempts + 1 WHERE AbhyasiID = '$username';");
+    }
+
+    function getLoginAttempts($username)
+    {
+        $max = "";
+        if ($result = mysqli_query($this->connection, "Select login_attempts as maximum from user WHERE AbhyasiID = '$username'")) {
+            while ($r = $result->fetch_assoc()) {
+                $max = $r['maximum'];
+            }
+        }
+        return $max;
+    }
+
+    function deactiveUser($username) {
+
+        mysqli_query($this->connection,"UPDATE user SET ActiveStatus = 'off' WHERE AbhyasiID = '$username';");
+    }
+
 
     function getMax()
     {

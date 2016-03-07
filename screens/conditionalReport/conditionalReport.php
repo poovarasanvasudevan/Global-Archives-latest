@@ -54,6 +54,7 @@ $pages = $db->getPages($_SESSION ['userPK']);
 
     <link rel="stylesheet" href="../../css/jquery.growl.css">
     <script src="../../js/jquery.growl.js"></script>
+    <script src="../../js/bootbox.min.js"></script>
 
     <style>
         .big-text {
@@ -78,7 +79,22 @@ $pages = $db->getPages($_SESSION ['userPK']);
             $('#conditionalForm').submit(function (ev) {
                 // Get all the forms elements and their values in one step
 
-                var values = $(this).serialize();
+
+                ev.preventDefault();
+                $('saveButton').prop('disabled','disbled')
+
+                var r = confirm("You want to submit ?")
+                if (r) {
+                    submitForm();
+                } else {
+                    $('saveButton').removeAttr("disabled")
+                    return false;
+                }
+            });
+
+            function submitForm() {
+
+                var values = $("#conditionalForm").serialize();
                 var scheduledKey = getUrlParameter('key');
                 var artefactCode = getUrlParameter('artefactCode');
                 var urlProcess = values + '&artefactCode=' + artefactCode + '&scheduledKey=' + scheduledKey;
@@ -100,9 +116,7 @@ $pages = $db->getPages($_SESSION ['userPK']);
                         }
                     }
                 });
-  
-                ev.preventDefault();
-            });
+            }
 
             $('#newCR').on('click', function () {
                 $('.full-form').slideDown(300);
@@ -369,7 +383,7 @@ $pages = $db->getPages($_SESSION ['userPK']);
                                                             WHERE cr.artefacttypecode = '$artefactTypeCode'
                                                             ORDER BY c.SequenceNo;";
 
-                                           // echo $sql;
+                                            // echo $sql;
                                             $res1 = $db->setQuery($sql);
                                             $allArray = array();
                                             $section = array();
@@ -421,28 +435,28 @@ $pages = $db->getPages($_SESSION ['userPK']);
                                                         if ($allArray[$i]['DataType'] == 'text') {
                                                             echo "<tr>";
                                                             echo "<td>" . $allArray[$i]['CheckListItem'] . "</td>";
-                                                            echo "<td><input type='text' class='form-control' name='" . $allArray[$i]['CheckListPK'] . "' id='" . $allArray[$i]['CheckListPK'] . "'></td>";
+                                                            echo "<td><input title='" . $allArray[$i]['CheckListItem'] . "' type='text' class='form-control' name='" . $allArray[$i]['CheckListPK'] . "' id='" . $allArray[$i]['CheckListPK'] . "'></td>";
                                                             echo "</tr>";
                                                         }
 
                                                         if ($allArray[$i]['DataType'] == 'date') {
                                                             echo "<tr>";
                                                             echo "<td>" . $allArray[$i]['CheckListItem'] . "</td>";
-                                                            echo "<td><input type='date' class='form-control' name='" . $allArray[$i]['CheckListPK'] . "' id='" . $allArray[$i]['CheckListPK'] . "'></td>";
+                                                            echo "<td><input title='" . $allArray[$i]['CheckListItem'] . "' type='date' class='form-control' name='" . $allArray[$i]['CheckListPK'] . "' id='" . $allArray[$i]['CheckListPK'] . "'></td>";
                                                             echo "</tr>";
                                                         }
 
                                                         if ($allArray[$i]['DataType'] == 'textarea') {
                                                             echo "<tr>";
                                                             echo "<td>" . $allArray[$i]['CheckListItem'] . "</td>";
-                                                            echo "<td><textarea  rows='3' class='form-control' name='" . $allArray[$i]['CheckListPK'] . "' id='" . $allArray[$i]['CheckListPK'] . "'></textarea></td>";
+                                                            echo "<td><textarea title='" . $allArray[$i]['CheckListItem'] . "' rows='3' class='form-control' name='" . $allArray[$i]['CheckListPK'] . "' id='" . $allArray[$i]['CheckListPK'] . "'></textarea></td>";
                                                             echo "</tr>";
                                                         }
 
                                                         if ($allArray[$i]['DataType'] == 'dropdown') {
                                                             echo "<tr>";
                                                             echo "<td>" . $allArray[$i]['CheckListItem'] . "</td>";
-                                                            echo "<td><select  class='form-control' name='" . $allArray[$i]['CheckListPK'] . "' id='" . $allArray[$i]['CheckListPK'] . "'>";
+                                                            echo "<td><select title='" . $allArray[$i]['CheckListItem'] . "'  class='form-control' name='" . $allArray[$i]['CheckListPK'] . "' id='" . $allArray[$i]['CheckListPK'] . "'>";
                                                             echo "<option value=''>Select One</option>";
 
                                                             $opvalue = $db->getAlistArray($allArray[$i]['pickcode']);
@@ -464,9 +478,11 @@ $pages = $db->getPages($_SESSION ['userPK']);
 
                                             <p class="text-center clearfix">
                                                 <input type="submit" id='saveButton' name='saveButton'
+                                                       title="Save Report"
                                                        class="btn btn-olive margin5" onclick='' value='Save'/>
 
                                                 <input type="reset" id='resetButton' name='resetButton'
+                                                       title="Reset Report"
                                                        class="btn btn-orange margin5" onClick='' value='Reset'/>
                                             </p>
 

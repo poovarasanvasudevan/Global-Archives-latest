@@ -6,7 +6,7 @@ $db->createConnection();
 
 $user = $_GET['userpk'];
 
-$sql = "update user set ActiveStatus='on' where userpk='$user'";
+$sql = "update user set ActiveStatus='on',login_attempts = 0 where userpk='$user'";
 
 if($db->setQuery($sql)) {
 	echo "success";

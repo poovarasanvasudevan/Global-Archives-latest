@@ -3,6 +3,7 @@
 //abyasiId=ghj&firstName=ghj&middleName=j&lastName=jgh&email=fghf%40emnail.com&location=421&roles=2
 
 include '../common/DatabaseConnection.php';
+include '../mail/mail.php';
 $db = new DatabaseConnection();
 $db->createConnection();
 
@@ -35,6 +36,13 @@ $sql = "INSERT INTO user VALUES
 $result = $db->setQuery($sql);
 
 if ($result) {
+
+    $res = wwwcopy("mailfile.php");
+    $res1 = str_replace("{{user}}", $fname, $res);
+    $res2 = str_replace("{{username}}", $abyasiId, $res1);
+    $res3 = str_replace("{{password}}", $password, $res2);
+
+    sendMail($email, $res3);
     echo 'success';
 } else {
     echo $sql;

@@ -7,7 +7,7 @@ $(function () {
         "lengthMenu": [3, 5, 10, 20, 40, 60, 80, 100],
         "pageLength": 5,
         "language": {
-            search: '<button type="button" class="btn-searchside" id="newRole" style="margin-right: 8px;" title="click to add new role"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i>&nbsp;New </span></button> <div class="input-group ip"> _INPUT_ <span class="input-group-addon searchbg"><i class="glyphicon glyphicon-search searchIcon"></i></span>'
+            search: '<button type="button" class="btn-searchside" id="newRole" style="margin-right: 8px;" title="click to add new role"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i>&nbsp;New </span></button> <div class="input-group ip"> _INPUT_'
         }
     });
 

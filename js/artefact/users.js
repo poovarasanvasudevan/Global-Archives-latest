@@ -8,7 +8,7 @@ $(function () {
         "lengthMenu": [3, 5, 10, 20, 40, 60, 80, 100],
         "pageLength": 5,
         "language": {
-            search: ' <button type="button" class="btn-searchside" id="new" style="margin-right: 10px;" title="click to add new user"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i>New </span></button><div class="input-group ip"> _INPUT_ <span class="input-group-addon searchbg"><i class="glyphicon glyphicon-search searchIcon"></i></span>'
+            search: ' <button type="button" class="btn-searchside" id="new" style="margin-right: 10px;" title="click to add new user"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i>New </span></button><div class="input-group ip"> _INPUT_ '
         }
     });
     $('#userTable').on('click', '.deleteButton', function (e) {

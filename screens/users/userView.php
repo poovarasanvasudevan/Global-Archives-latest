@@ -214,7 +214,7 @@ $pages = $db->getPages($_SESSION['userPK']);
 
                                                     <tr>
                                                         <td class="padding">Password</td>
-                                                        <td class="padding"><input type="password" id='epassword'
+                                                        <td class="padding"><input type="password" id='epassword' maxlength="10"
                                                                                    name='Password' class='form-control'>
                                                         </td>
                                                     </tr>
@@ -331,7 +331,7 @@ $pages = $db->getPages($_SESSION['userPK']);
                                                 <tr>
                                                     <td class="padding">Password</td>
                                                     <td class="padding"><input type="password" id='password'
-                                                                               name='Password' class='form-control'
+                                                                               name='Password' class='form-control' maxlength="10"
                                                                                required></td>
                                                 </tr>
 

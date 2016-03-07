@@ -63,7 +63,11 @@ if (isset($_SESSION['artefactUser'])) {
 							<span id="error">
 								<?php
                                 if (isset($_GET['error'])) {
-                                    echo '<h5 class="text-danger">Invalid Abhyasi Id</h5>';
+                                    if ($_GET['error'] == "invalid") {
+                                        echo '<h5 class="text-danger">Invalid Password</h5>';
+                                    } else {
+                                        echo '<h5 class="text-danger">Your account is Locked please contact admin</h5>';
+                                    }
                                 }
                                 ?>
 							</span>
@@ -77,7 +81,11 @@ if (isset($_SESSION['artefactUser'])) {
 							<span id="error">
 								<?php
                                 if (isset($_GET['error'])) {
-                                    echo '<h5 class="text-danger">Invalid Password</h5>';
+                                    if ($_GET['error'] == "invalid") {
+                                        echo '<h5 class="text-danger">Invalid Password</h5>';
+                                    } else {
+                                        echo '<h5 class="text-danger">Your account is Locked please contact admin</h5>';
+                                    }
                                 }
                                 ?>
 							</span>

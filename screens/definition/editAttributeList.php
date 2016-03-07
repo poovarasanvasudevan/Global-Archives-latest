@@ -147,7 +147,7 @@ for ($index1 = 0; $index1 < sizeof($columnArray); $index1++) {
             $selectionFlag = true;
             echo "<div class='col-md-6'>";
             //echo $attributeValue[$index1];
-            echo "<select name='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "' id='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "' class='form-control'>";
+            echo "<select title='Please select ". $columnArray[$index1]."' name='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "' id='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "' class='form-control'>";
             echo '<option value=' . '' . '> Select One </option>';
 
             if (isset($GET['artefactTitle']) || isset($_GET['artefactCode'])) { //&& $dropdownResultArray[$index][$index3]==$attributeValue[$index1])
@@ -186,7 +186,7 @@ for ($index1 = 0; $index1 < sizeof($columnArray); $index1++) {
 
         if ($inputType[$index1] == 'textarea') {
 
-            echo "<div class='col-md-6'> <textarea  class='form-control' rows='5' cols='10' id='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "'  name='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "' >$value </textarea></div>";
+            echo "<div class='col-md-6'> <textarea title='Please enter ". $columnArray[$index1]."'  class='form-control' rows='5' cols='10' id='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "'  name='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "' >$value </textarea></div>";
 
 
         } else if ($inputType[$index1] == 'file') {
@@ -231,7 +231,7 @@ for ($index1 = 0; $index1 < sizeof($columnArray); $index1++) {
 
 
         } else {
-            echo "<div class='col-md-6'> <input type='$inputType[$index1]' class='form-control' id='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "'  name='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "'  value='$value'> </div>";
+            echo "<div class='col-md-6'> <input title='Please enter ". $columnArray[$index1]."' type='$inputType[$index1]' class='form-control' id='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "'  name='" . $db->getAttributeCode($_SESSION['type'], $columnArray[$index1]) . "'  value='$value'> </div>";
         }
     }
     echo "</div>";

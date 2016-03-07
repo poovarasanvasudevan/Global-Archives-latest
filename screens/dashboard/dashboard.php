@@ -177,7 +177,7 @@ $pages = $obj->getPages($_SESSION['userPK']);
                                                 </div>
                                                 <div class="col-md-12 text-right tile-total">
                                                 </div>
-                                                <div class="col-md-12 text-center moreinfo" title="Search for books"
+                                                <div class="col-md-12 text-center moreinfo" title="Click to see tash for <?php echo $rowDash['ArtefactTypeDescription']; ?>"
                                                      id='<?php echo $rowDash['ArtefactTypeCode']; ?>'>
                                                     <span><a href='#' class=''>Click to See your tasks</a> </span>
                                                 </div>

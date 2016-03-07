@@ -610,54 +610,61 @@ $pages = $db->getPages($_SESSION['userPK']);
                 $('#AttributeListDiv').html("<div style='color: grey'> Select Your Option </div>");
             }
             else if (str == 'Save') {
-                var DataArray = new Array();
-                var nameArray = new Array();
-                var length = document.forms.length;
-                for (var index = 0; index < length; index++) {
-                    if (document.forms[index].id == 'columnValuesForm') {
-                        var formData = document.forms[index];
-                        var filledCount = 0;
-                        for (i = 0; i < formData.length; i++) {
-                            if (formData.elements[i].value != '') {
-                                filledCount++;
-                                DataArray[i] = formData.elements[i].value;
-                                nameArray[i] = formData.elements[i].id;
+
+                var r = confirm("Are you sure you want to submit ?");
+                if(r) {
+
+                    var DataArray = new Array();
+                    var nameArray = new Array();
+                    var length = document.forms.length;
+                    for (var index = 0; index < length; index++) {
+                        if (document.forms[index].id == 'columnValuesForm') {
+                            var formData = document.forms[index];
+                            var filledCount = 0;
+                            for (i = 0; i < formData.length; i++) {
+                                if (formData.elements[i].value != '') {
+                                    filledCount++;
+                                    DataArray[i] = formData.elements[i].value;
+                                    nameArray[i] = formData.elements[i].id;
+                                }
+                                else {
+                                    DataArray[i] = 'NULL';
+                                    nameArray[i] = formData.elements[i].id;
+                                }
                             }
+                            if (filledCount < 2)
+                                $.growl.error({message: "Please fill, even known datas..", size: 'large'});
                             else {
-                                DataArray[i] = 'NULL';
-                                nameArray[i] = formData.elements[i].id;
+                                var activeNodeKey = '';
+                                var activeNodeTitle = '';
+                                if (node = $("#tree").fancytree("getActiveNode")) {
+                                    activeNodeKey = node.key;
+                                    activeNodeTitle = node.title;
+                                }
+
+                                if (activeNodeKey) {
+                                    //alert(node);
+
+                                    var da1 = DataArray.join("@");
+                                    var na1 = nameArray.join("@");
+
+
+                                    $.ajax({
+                                        url: "SaveAttributes.php",
+                                        data: "elem=" + na1 + "&dataArray=" + da1 + '&artefactCode=' + activeNodeKey + '&artefactName=' + activeNodeTitle + '&type=' + $("#typeSelect").val(),
+                                        success: function (data) {
+                                            //$('#AttributeListDiv').html(data);
+                                            $.growl.notice({message: "Artefact Succesfully Updated...", size: 'large'});
+                                        }
+                                    })
+                                }
+                                else
+                                    $.growl.error({message: "Please Select the artefact in Tree..", size: 'large'});
                             }
-                        }
-                        if (filledCount < 2)
-                            $.growl.error({message: "Please fill, even known datas..", size: 'large'});
-                        else {
-                            var activeNodeKey = '';
-                            var activeNodeTitle = '';
-                            if (node = $("#tree").fancytree("getActiveNode")) {
-                                activeNodeKey = node.key;
-                                activeNodeTitle = node.title;
-                            }
-
-                            if (activeNodeKey) {
-                                //alert(node);
-
-                                var da1 = DataArray.join("@");
-                                var na1 = nameArray.join("@");
-
-
-                                $.ajax({
-                                    url: "SaveAttributes.php",
-                                    data: "elem=" + na1 + "&dataArray=" + da1 + '&artefactCode=' + activeNodeKey + '&artefactName=' + activeNodeTitle + '&type=' + $("#typeSelect").val(),
-                                    success: function (data) {
-                                        //$('#AttributeListDiv').html(data);
-                                        $.growl.notice({message: "Artefact Succesfully Updated...", size: 'large'});
-                                    }
-                                })
-                            }
-                            else
-                                $.growl.error({message: "Please Select the artefact in Tree..", size: 'large'});
                         }
                     }
+                } else {
+
                 }
 
             }
